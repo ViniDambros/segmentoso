@@ -1,0 +1,41 @@
+#include <Arduino.h>
+
+int i, tempo = 1000, nums[9][7] = {
+  0,1,1,0,0,0,0,
+  1,1,0,1,1,0,1,
+  1,1,1,1,0,0,1,
+  0,1,1,0,0,1,1,
+  1,0,1,1,0,1,1,
+  1,0,1,1,1,1,1,
+  1,1,1,0,0,0,0,
+  1,1,1,1,1,1,1,
+  1,1,1,0,0,1,1,
+};
+
+void apaga()
+{
+  for(i=1;i<=7;i++)
+    digitalWrite(i,HIGH);
+}
+
+void escreve(int lin)
+{
+  lin--;
+  for(i=1;i<=7;i++)
+    if(nums[lin][i-1])
+      digitalWrite(i,LOW);
+  delay(tempo);  
+}
+
+void setup() {
+  for(i=1;i<=7;i++)
+    pinMode(i,OUTPUT);
+}
+
+void loop() {
+  for(int j=1;j<=9;j++)
+  {
+    escreve(j);
+    apaga();
+  }
+}
